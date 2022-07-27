@@ -7,6 +7,7 @@ CronJob動作検証用サンプルプログラムです。
   - [API一覧](#api一覧)
   - [Node.jsのバージョン](#nodejsのバージョン)
   - [Dockerイメージ作成手順](#dockerイメージ作成手順)
+- [kustomize](#kustomize)
 
 ## [webapp](webapp/)
 
@@ -34,3 +35,9 @@ cd webapp
 chmod +x docker-build.sh
 ./docker-build.sh
 ```
+
+## [kustomize](kustomize/)
+
+KubernetesにデプロイするためのYamlファイル群です。
+
+CronJobを含んでいます。
