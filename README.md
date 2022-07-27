@@ -2,11 +2,15 @@
 
 CronJob動作検証用サンプルプログラムです。
 
-## ディレクトリ構成
+## [webapp](webapp/)
 
-- [webapp](webapp/)
-  - CronJobから呼び出されるWebアプリ
-  - Node.js Expressで実装
+CronJobから呼び出されるWebAPIアプリです。Node.js Expressで実装しています。
+
+API一覧
+
+|URL|概要|
+|---|---|
+|`/wait/:seconds`|指定された秒数待ってからレスポンスします。|
 
 ## Node.jsのバージョン
 

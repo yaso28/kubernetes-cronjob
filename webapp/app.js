@@ -1,20 +1,42 @@
-var express = require('express');
-var path = require('path');
-var cookieParser = require('cookie-parser');
-var logger = require('morgan');
+const express = require('express');
+const { setTimeout } = require('timers/promises');
 
-var indexRouter = require('./routes/index');
-var usersRouter = require('./routes/users');
+const app = express();
 
-var app = express();
+const log = (id, message) => {
+  console.log(`${id} ${new Date().toLocaleTimeString()} ${message}`);
+};
 
-app.use(logger('dev'));
-app.use(express.json());
-app.use(express.urlencoded({ extended: false }));
-app.use(cookieParser());
-app.use(express.static(path.join(__dirname, 'public')));
+app.get('/wait/:seconds', async (req, res) => {
+  const id = Math.random();
 
-app.use('/', indexRouter);
-app.use('/users', usersRouter);
+  try {
+    const seconds = parseInt(req.params.seconds);
+    log(id, 'begin');
+
+    for (i = 1; i <= seconds; i++) {
+      await setTimeout(1000);
+      log(id, `...${i}`);
+    }
+
+    log(id, 'end');
+
+    res.json({
+      id,
+      seconds
+    })
+  } catch (err) {
+    log(id, err);
+    res.status(500).json({
+      error: err.message
+    });
+  }
+});
+
+app.use((req, res, next) => {
+  res.status(404).json({
+    error: 'Not Found.'
+  });
+});
 
 module.exports = app;
