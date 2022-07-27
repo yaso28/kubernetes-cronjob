@@ -14,7 +14,7 @@ app.get('/wait/:seconds', async (req, res) => {
     const seconds = parseInt(req.params.seconds);
     log(id, 'begin');
 
-    for (i = 1; i <= seconds; i++) {
+    for (let i = 1; i <= seconds; i++) {
       await setTimeout(1000);
       log(id, `...${i}`);
     }
